@@ -25,26 +25,26 @@ public class GameViewer {
         this.frame.setSize(500,500);
         this.frame.setLayout(new BorderLayout());
 
-        JPanel panelSuperior = new JPanel();
-        JPanel panelCentral = new JPanel();
-        JPanel panelInferior = new JPanel();
-        this.frame.add(panelSuperior, BorderLayout.NORTH);
-        this.frame.add(panelCentral, BorderLayout.CENTER);
-        this.frame.add(panelInferior, BorderLayout.SOUTH);
+        JPanel panelTop = new JPanel();
+        JPanel panelMid = new JPanel();
+        JPanel panelBot = new JPanel();
+        this.frame.add(panelTop, BorderLayout.NORTH);
+        this.frame.add(panelMid, BorderLayout.CENTER);
+        this.frame.add(panelBot, BorderLayout.SOUTH);
 
-        panelSuperior.setBorder(
+        panelTop.setBorder(
                 BorderFactory.createTitledBorder("Menu")
         );
 
-        panelCentral.setBorder(
+        panelMid.setBorder(
                 BorderFactory.createTitledBorder("Tabuleiro")
         );
 
-        panelInferior.setBorder(
+        panelBot.setBorder(
                 BorderFactory.createTitledBorder("Estatísticas")
         );
 
-        this.renderTabuleiro(panelCentral);
+        this.renderTabuleiro(panelMid);
     }
 
     private void renderTabuleiro(JPanel panelTabuleiro) {

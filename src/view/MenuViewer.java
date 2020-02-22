@@ -16,13 +16,13 @@ public class MenuViewer {
         this.frame.setVisible(true);
         this.frame.setSize(500,500);
 
-        JPanel panelCentral = new JPanel();
-        this.frame.add(panelCentral, BorderLayout.CENTER);
+        JPanel panelMid = new JPanel();
+        this.frame.add(panelMid, BorderLayout.CENTER);
 
-        panelCentral.setBorder(
+        panelMid.setBorder(
                 BorderFactory.createTitledBorder("Modo de Jogo")
         );
-        panelCentral.setLayout(new GridLayout(2,1));
+        panelMid.setLayout(new GridLayout(2,1));
 
         JButton singlePlayerButton = new JButton("Singleplayer");
         JButton multiPlayerButton = new JButton("Multiplayer");
@@ -34,8 +34,8 @@ public class MenuViewer {
         singlePlayerButton.addActionListener(this::singlePlayerButtonClick);
         multiPlayerButton.addActionListener(this::multiPlayerButtonClick);
 
-        panelCentral.add(singlePlayerButton);
-        panelCentral.add(multiPlayerButton);
+        panelMid.add(singlePlayerButton);
+        panelMid.add(multiPlayerButton);
 
     }
 
