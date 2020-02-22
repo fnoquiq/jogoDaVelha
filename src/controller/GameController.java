@@ -1,5 +1,8 @@
 package controller;
 
+import exception.ChestCaseOccupedException;
+import exception.OutOfChestException;
+
 public class GameController {
     public int[][] chest = new int[3][3];
 
@@ -12,13 +15,17 @@ public class GameController {
         this.resetChest();
     }
 
-    public int play(int x,int y) throws Exception {
+    public boolean play(int x,int y) throws ChestCaseOccupedException {
         if (x<0 || x>3) {
-            throw new Exception("Value of X is out of the chess");
+            throw new OutOfChestException("Value of X is out of the chest");
         }
 
         if (y<0 || y>3) {
-            throw new Exception("Value of Y is out of the chess");
+            throw new OutOfChestException("Value of Y is out of the chest");
+        }
+
+        if (this.chest[x][y] != 0) {
+            throw new ChestCaseOccupedException("Pos x|y: " + x + y + " occuped!");
         }
 
         this.chest[x][y] = this.currentPlayer;
@@ -27,8 +34,8 @@ public class GameController {
         return this.checkWinner();
     }
 
-    private int checkWinner() {
-        return 0;
+    private boolean checkWinner() {
+        return true;
     }
 
     private void resetChest() {

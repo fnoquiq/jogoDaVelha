@@ -1,6 +1,9 @@
 package view;
 
 import controller.GameController;
+import exception.ChestCaseOccupedException;
+import model.Pos;
+import util.Util;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,10 +12,10 @@ import java.util.ArrayList;
 
 public class GameViewer {
 
-    private JFrame frame;
-
     public static final int SINGLEPLAYER = 0;
     public static final int MULTIPLAYER = 1;
+
+    private JFrame frame;
     private final int mode;
 
     private ArrayList<JButton> buttonChess = new ArrayList();
@@ -57,13 +60,21 @@ public class GameViewer {
         this.renderTabuleiro(panelMid);
     }
 
+    private void refreshChest() {
+        for (int i=0;i<9;i++) {
+            Pos pos = Util.singleToPos(i);
+
+            this.buttonChess.get(i).setText(this.gameController.chest[pos.x][pos.y] + "");
+        }
+    }
+
     private void renderStatus(JPanel panelStatus) {
         JLabel currentPlayerLabel = new JLabel("Vez do Jogador: " + this.gameController.currentPlayer);
         panelStatus.add(currentPlayerLabel);
     }
 
     private void renderTabuleiro(JPanel panelChest) {
-        String startCharOnButton = ".";
+        String startCharOnButton = "0";
 
         panelChest.setLayout(new GridLayout(3,3));
 
@@ -77,24 +88,100 @@ public class GameViewer {
             this.buttonChess.add(button);
         }
 
-        this.buttonChess.get(0).addActionListener(this::buttonPos11Click);
-        this.buttonChess.get(1).addActionListener(this::buttonPos12Click);
-        this.buttonChess.get(2).addActionListener(this::buttonPos13Click);
-        this.buttonChess.get(3).addActionListener(this::buttonPos21Click);
-        this.buttonChess.get(4).addActionListener(this::buttonPos22Click);
-        this.buttonChess.get(5).addActionListener(this::buttonPos23Click);
-        this.buttonChess.get(6).addActionListener(this::buttonPos31Click);
-        this.buttonChess.get(7).addActionListener(this::buttonPos32Click);
-        this.buttonChess.get(8).addActionListener(this::buttonPos33Click);
+        this.buttonChess.get(0).addActionListener(this::buttonPos1Click);
+        this.buttonChess.get(1).addActionListener(this::buttonPos2Click);
+        this.buttonChess.get(2).addActionListener(this::buttonPos3Click);
+        this.buttonChess.get(3).addActionListener(this::buttonPos4Click);
+        this.buttonChess.get(4).addActionListener(this::buttonPos5Click);
+        this.buttonChess.get(5).addActionListener(this::buttonPos6Click);
+        this.buttonChess.get(6).addActionListener(this::buttonPos7Click);
+        this.buttonChess.get(7).addActionListener(this::buttonPos8Click);
+        this.buttonChess.get(8).addActionListener(this::buttonPos9Click);
     }
 
-    private void buttonPos11Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "1");};
-    private void buttonPos12Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "2");}
-    private void buttonPos13Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "3");}
-    private void buttonPos21Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "4");}
-    private void buttonPos22Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "5");}
-    private void buttonPos23Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "6");}
-    private void buttonPos31Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "7");}
-    private void buttonPos32Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "8");}
-    private void buttonPos33Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "9");}
+    private void buttonPos1Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(0);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    };
+    private void buttonPos2Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(1);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+    private void buttonPos3Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(2);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+    private void buttonPos4Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(3);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+    private void buttonPos5Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(4);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+    private void buttonPos6Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(5);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+    private void buttonPos7Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(6);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+    private void buttonPos8Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(7);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+    private void buttonPos9Click(ActionEvent event) {
+        try {
+            Pos pos = Util.singleToPos(8);
+            this.gameController.play(pos.x, pos.y);
+            this.refreshChest();
+        } catch (ChestCaseOccupedException e) {
+            this.occupedChest();
+        }
+    }
+
+    private void occupedChest() {
+        JOptionPane.showMessageDialog(null,"Ocupado!");
+    }
 }
