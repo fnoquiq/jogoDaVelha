@@ -40,11 +40,15 @@ public class MenuViewer {
     }
 
     private void singlePlayerButtonClick(ActionEvent event) {
-        JOptionPane.showMessageDialog(null, "Ainda não disponivel!");
+        GameViewer game = new GameViewer(GameViewer.SINGLEPLAYER);
+        game.run();
+        this.frame.dispose();
     }
 
     private void multiPlayerButtonClick(ActionEvent event) {
-        JOptionPane.showMessageDialog(null, "Ainda não disponivel!");
+        GameViewer game = new GameViewer(GameViewer.MULTIPLAYER);
+        game.run();
+        this.frame.dispose();
     }
 
 }
