@@ -1,5 +1,7 @@
 package view;
 
+import controller.GameController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,8 +14,22 @@ public class GameViewer {
     public static final int MULTIPLAYER = 1;
     private final int mode;
 
+    private JButton buttonPos11;
+    private JButton buttonPos12;
+    private JButton buttonPos13;
+    private JButton buttonPos21;
+    private JButton buttonPos22;
+    private JButton buttonPos23;
+    private JButton buttonPos31;
+    private JButton buttonPos32;
+    private JButton buttonPos33;
+
+    private GameController gameController;
+
     public GameViewer(int mode) {
         this.mode = mode;
+
+        this.gameController = new GameController();
     }
 
     public void run() {
@@ -33,7 +49,7 @@ public class GameViewer {
         this.frame.add(panelBot, BorderLayout.SOUTH);
 
         panelTop.setBorder(
-                BorderFactory.createTitledBorder("Menu")
+                BorderFactory.createTitledBorder("Status")
         );
 
         panelMid.setBorder(
@@ -44,54 +60,60 @@ public class GameViewer {
                 BorderFactory.createTitledBorder("Estatísticas")
         );
 
+        this.renderStatus(panelTop);
         this.renderTabuleiro(panelMid);
     }
 
-    private void renderTabuleiro(JPanel panelTabuleiro) {
+    private void renderStatus(JPanel panelStatus) {
+        JLabel currentPlayerLabel = new JLabel("Vez do Jogador: " + this.gameController.currentPlayer);
+        panelStatus.add(currentPlayerLabel);
+    }
+
+    private void renderTabuleiro(JPanel panelChest) {
         String startCharOnButton = ".";
 
-        panelTabuleiro.setLayout(new GridLayout(3,3));
+        panelChest.setLayout(new GridLayout(3,3));
 
-        JButton buttonPos11 = new JButton(startCharOnButton);
-        JButton buttonPos12 = new JButton(startCharOnButton);
-        JButton buttonPos13 = new JButton(startCharOnButton);
-        JButton buttonPos21 = new JButton(startCharOnButton);
-        JButton buttonPos22 = new JButton(startCharOnButton);
-        JButton buttonPos23 = new JButton(startCharOnButton);
-        JButton buttonPos31 = new JButton(startCharOnButton);
-        JButton buttonPos32 = new JButton(startCharOnButton);
-        JButton buttonPos33 = new JButton(startCharOnButton);
+        this.buttonPos11 = new JButton(startCharOnButton);
+        this.buttonPos12 = new JButton(startCharOnButton);
+        this.buttonPos13 = new JButton(startCharOnButton);
+        this.buttonPos21 = new JButton(startCharOnButton);
+        this.buttonPos22 = new JButton(startCharOnButton);
+        this.buttonPos23 = new JButton(startCharOnButton);
+        this.buttonPos31 = new JButton(startCharOnButton);
+        this.buttonPos32 = new JButton(startCharOnButton);
+        this.buttonPos33 = new JButton(startCharOnButton);
 
         Font font = new Font("TimesRoman", Font.BOLD, 40);
-        buttonPos11.setFont(font);
-        buttonPos12.setFont(font);
-        buttonPos13.setFont(font);
-        buttonPos21.setFont(font);
-        buttonPos22.setFont(font);
-        buttonPos23.setFont(font);
-        buttonPos31.setFont(font);
-        buttonPos32.setFont(font);
-        buttonPos33.setFont(font);
+        this.buttonPos11.setFont(font);
+        this.buttonPos12.setFont(font);
+        this.buttonPos13.setFont(font);
+        this.buttonPos21.setFont(font);
+        this.buttonPos22.setFont(font);
+        this.buttonPos23.setFont(font);
+        this.buttonPos31.setFont(font);
+        this.buttonPos32.setFont(font);
+        this.buttonPos33.setFont(font);
 
-        panelTabuleiro.add(buttonPos11);
-        panelTabuleiro.add(buttonPos12);
-        panelTabuleiro.add(buttonPos13);
-        panelTabuleiro.add(buttonPos21);
-        panelTabuleiro.add(buttonPos22);
-        panelTabuleiro.add(buttonPos23);
-        panelTabuleiro.add(buttonPos31);
-        panelTabuleiro.add(buttonPos32);
-        panelTabuleiro.add(buttonPos33);
+        panelChest.add(this.buttonPos11);
+        panelChest.add(this.buttonPos12);
+        panelChest.add(this.buttonPos13);
+        panelChest.add(this.buttonPos21);
+        panelChest.add(this.buttonPos22);
+        panelChest.add(this.buttonPos23);
+        panelChest.add(this.buttonPos31);
+        panelChest.add(this.buttonPos32);
+        panelChest.add(this.buttonPos33);
 
-        buttonPos11.addActionListener(this::buttonPos11Click);
-        buttonPos12.addActionListener(this::buttonPos12Click);
-        buttonPos13.addActionListener(this::buttonPos13Click);
-        buttonPos21.addActionListener(this::buttonPos21Click);
-        buttonPos22.addActionListener(this::buttonPos22Click);
-        buttonPos23.addActionListener(this::buttonPos23Click);
-        buttonPos31.addActionListener(this::buttonPos31Click);
-        buttonPos32.addActionListener(this::buttonPos32Click);
-        buttonPos33.addActionListener(this::buttonPos33Click);
+        this.buttonPos11.addActionListener(this::buttonPos11Click);
+        this.buttonPos12.addActionListener(this::buttonPos12Click);
+        this.buttonPos13.addActionListener(this::buttonPos13Click);
+        this.buttonPos21.addActionListener(this::buttonPos21Click);
+        this.buttonPos22.addActionListener(this::buttonPos22Click);
+        this.buttonPos23.addActionListener(this::buttonPos23Click);
+        this.buttonPos31.addActionListener(this::buttonPos31Click);
+        this.buttonPos32.addActionListener(this::buttonPos32Click);
+        this.buttonPos33.addActionListener(this::buttonPos33Click);
     }
 
     private void buttonPos11Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
