@@ -5,6 +5,7 @@ import controller.GameController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class GameViewer {
 
@@ -14,15 +15,7 @@ public class GameViewer {
     public static final int MULTIPLAYER = 1;
     private final int mode;
 
-    private JButton buttonPos11;
-    private JButton buttonPos12;
-    private JButton buttonPos13;
-    private JButton buttonPos21;
-    private JButton buttonPos22;
-    private JButton buttonPos23;
-    private JButton buttonPos31;
-    private JButton buttonPos32;
-    private JButton buttonPos33;
+    private ArrayList<JButton> buttonChess = new ArrayList();
 
     private GameController gameController;
 
@@ -74,55 +67,34 @@ public class GameViewer {
 
         panelChest.setLayout(new GridLayout(3,3));
 
-        this.buttonPos11 = new JButton(startCharOnButton);
-        this.buttonPos12 = new JButton(startCharOnButton);
-        this.buttonPos13 = new JButton(startCharOnButton);
-        this.buttonPos21 = new JButton(startCharOnButton);
-        this.buttonPos22 = new JButton(startCharOnButton);
-        this.buttonPos23 = new JButton(startCharOnButton);
-        this.buttonPos31 = new JButton(startCharOnButton);
-        this.buttonPos32 = new JButton(startCharOnButton);
-        this.buttonPos33 = new JButton(startCharOnButton);
-
         Font font = new Font("TimesRoman", Font.BOLD, 40);
-        this.buttonPos11.setFont(font);
-        this.buttonPos12.setFont(font);
-        this.buttonPos13.setFont(font);
-        this.buttonPos21.setFont(font);
-        this.buttonPos22.setFont(font);
-        this.buttonPos23.setFont(font);
-        this.buttonPos31.setFont(font);
-        this.buttonPos32.setFont(font);
-        this.buttonPos33.setFont(font);
 
-        panelChest.add(this.buttonPos11);
-        panelChest.add(this.buttonPos12);
-        panelChest.add(this.buttonPos13);
-        panelChest.add(this.buttonPos21);
-        panelChest.add(this.buttonPos22);
-        panelChest.add(this.buttonPos23);
-        panelChest.add(this.buttonPos31);
-        panelChest.add(this.buttonPos32);
-        panelChest.add(this.buttonPos33);
+        for(int i=0;i<9;i++) {
+            JButton button = new JButton(startCharOnButton);
+            button.setFont(font);
+            panelChest.add(button);
 
-        this.buttonPos11.addActionListener(this::buttonPos11Click);
-        this.buttonPos12.addActionListener(this::buttonPos12Click);
-        this.buttonPos13.addActionListener(this::buttonPos13Click);
-        this.buttonPos21.addActionListener(this::buttonPos21Click);
-        this.buttonPos22.addActionListener(this::buttonPos22Click);
-        this.buttonPos23.addActionListener(this::buttonPos23Click);
-        this.buttonPos31.addActionListener(this::buttonPos31Click);
-        this.buttonPos32.addActionListener(this::buttonPos32Click);
-        this.buttonPos33.addActionListener(this::buttonPos33Click);
+            this.buttonChess.add(button);
+        }
+
+        this.buttonChess.get(0).addActionListener(this::buttonPos11Click);
+        this.buttonChess.get(1).addActionListener(this::buttonPos12Click);
+        this.buttonChess.get(2).addActionListener(this::buttonPos13Click);
+        this.buttonChess.get(3).addActionListener(this::buttonPos21Click);
+        this.buttonChess.get(4).addActionListener(this::buttonPos22Click);
+        this.buttonChess.get(5).addActionListener(this::buttonPos23Click);
+        this.buttonChess.get(6).addActionListener(this::buttonPos31Click);
+        this.buttonChess.get(7).addActionListener(this::buttonPos32Click);
+        this.buttonChess.get(8).addActionListener(this::buttonPos33Click);
     }
 
-    private void buttonPos11Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos12Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos13Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos21Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos22Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos23Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos31Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos32Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
-    private void buttonPos33Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "Ainda não disponivel!");}
+    private void buttonPos11Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "1");};
+    private void buttonPos12Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "2");}
+    private void buttonPos13Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "3");}
+    private void buttonPos21Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "4");}
+    private void buttonPos22Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "5");}
+    private void buttonPos23Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "6");}
+    private void buttonPos31Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "7");}
+    private void buttonPos32Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "8");}
+    private void buttonPos33Click(ActionEvent event) {  JOptionPane.showMessageDialog(null, "9");}
 }
