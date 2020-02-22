@@ -1,11 +1,9 @@
-import view.Menu;
-
-import java.util.ArrayList;
+import view.MenuViewer;
 
 public class Main {
     public static void main(String[] args) {
 
-        Menu menu = new Menu();
+        MenuViewer menu = new MenuViewer();
         menu.run();
     }
 }
