@@ -2,14 +2,17 @@ package controller;
 
 import exception.ChestCaseOccupedException;
 import exception.OutOfChestException;
+import view.GameViewer;
 
 public class GameController {
+
+    private static final int CHEST_TAM = 3;
 
     private static final int PLAYER_1 = 1;
     private static final int PLAYER_2 = -1;
     private static final int NO_PLAYER = 0;
 
-    public int[][] chest = new int[3][3];
+    public int[][] chest = new int[CHEST_TAM][CHEST_TAM];
     public int winner;
     public int currentPlayer;
 
@@ -56,9 +59,12 @@ public class GameController {
         int sumPlayer1OnDioganal = 0;
         int sumPlayer2OnDioganal = 0;
 
+        int sumPlayer1OnInvertedDioganal = 0;
+        int sumPlayer2OnInvertedDioganal = 0;
+
         for (int i=0; i<3; i++) {
             for (int j=0; j<3; j++) {
-               if (i==j) {
+               if (i == j) {
                    int playerOnDiagonal = this.chest[i][j];
                    if (playerOnDiagonal == GameController.PLAYER_1) {
                        sumPlayer1OnDioganal += playerOnDiagonal;
@@ -66,13 +72,22 @@ public class GameController {
                        sumPlayer2OnDioganal += playerOnDiagonal;
                    }
                }
+
+               if (i+j == (GameController.CHEST_TAM -1)) {
+                   int playerOnInvertedDiagonal = this.chest[i][j];
+                   if (playerOnInvertedDiagonal == GameController.PLAYER_1) {
+                       sumPlayer1OnInvertedDioganal += playerOnInvertedDiagonal;
+                   } else if (playerOnInvertedDiagonal == GameController.PLAYER_2) {
+                       sumPlayer2OnInvertedDioganal += playerOnInvertedDiagonal;
+                   }
+               }
             }
         }
 
-        if (sumPlayer1OnDioganal == 3) {
+        if ((sumPlayer1OnDioganal == 3) || (sumPlayer1OnInvertedDioganal == 3)) {
             this.winner = GameController.PLAYER_1;
             return true;
-        } else if (sumPlayer2OnDioganal == -3) {
+        } else if ((sumPlayer2OnDioganal == -3) || (sumPlayer2OnInvertedDioganal == -3)) {
             this.winner = GameController.PLAYER_2;
             return true;
         }
