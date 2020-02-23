@@ -2,7 +2,6 @@ package controller;
 
 import exception.ChestCaseOccupedException;
 import exception.OutOfChestException;
-import view.GameViewer;
 
 public class GameController {
 

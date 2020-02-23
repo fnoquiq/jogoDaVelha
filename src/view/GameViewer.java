@@ -28,12 +28,10 @@ public class GameViewer {
 
     public GameViewer(int mode) {
         this.mode = mode;
-
         this.gameController = new GameController();
     }
 
     public void run() {
-
         this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setTitle("Game Viewer (" + this.mode + ")");
@@ -70,7 +68,8 @@ public class GameViewer {
 
             this.buttonChess.get(i).setText(this.playerCharDecode(this.gameController.chest[pos.x][pos.y]));
         }
-        this.currentPlayerLabel.setText("Vez do Jogador:" + this.gameController.currentPlayer);
+
+        this.currentPlayerLabel.setText("Vez do Jogador: " + this.playerCharDecode(this.gameController.currentPlayer));
     }
 
     private String playerCharDecode(int i) {
@@ -87,7 +86,7 @@ public class GameViewer {
     }
 
     private void renderStatus(JPanel panelStatus) {
-        this.currentPlayerLabel = new JLabel("Vez do Jogador: " + this.gameController.currentPlayer);
+        this.currentPlayerLabel = new JLabel("Vez do Jogador: " + this.playerCharDecode(this.gameController.currentPlayer));
         panelStatus.add(this.currentPlayerLabel);
 
         JButton newGameButton = new JButton("Novo Jogo");
