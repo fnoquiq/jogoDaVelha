@@ -4,11 +4,13 @@ import exception.ChestCaseOccupedException;
 import exception.OutOfChestException;
 
 public class GameController {
-    public int[][] chest = new int[3][3];
 
     private static final int PLAYER_1 = 1;
     private static final int PLAYER_2 = -1;
+    private static final int NO_PLAYER = 0;
 
+    public int[][] chest = new int[3][3];
+    public int winner = GameController.NO_PLAYER;
     public int currentPlayer = GameController.PLAYER_1;
 
     public GameController() {
@@ -35,13 +37,13 @@ public class GameController {
     }
 
     private boolean checkWinner() {
-        return true;
+        return false;
     }
 
     private void resetChest() {
         for(int i=0; i<3; i++) {
             for(int j=0; j<3; j++) {
-                chest[i][j] = 0;
+                chest[i][j] = GameController.NO_PLAYER;
             }
         }
     }

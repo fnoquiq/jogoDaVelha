@@ -115,89 +115,54 @@ public class GameViewer {
         this.buttonChess.get(8).addActionListener(this::buttonPos9Click);
     }
 
-    private void buttonPos1Click(ActionEvent event) {
+    private void doPlay(Pos pos) {
         try {
-            Pos pos = Util.singleToPos(0);
-            this.gameController.play(pos.x, pos.y);
+            boolean isWinner = this.gameController.play(pos.x, pos.y);
+
             this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    };
-    private void buttonPos2Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(1);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    }
-    private void buttonPos3Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(2);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    }
-    private void buttonPos4Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(3);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    }
-    private void buttonPos5Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(4);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    }
-    private void buttonPos6Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(5);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    }
-    private void buttonPos7Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(6);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    }
-    private void buttonPos8Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(7);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
-        } catch (ChestCaseOccupedException e) {
-            this.occupedChest();
-        }
-    }
-    private void buttonPos9Click(ActionEvent event) {
-        try {
-            Pos pos = Util.singleToPos(8);
-            this.gameController.play(pos.x, pos.y);
-            this.refreshChest();
+
+            this.checkWinner(isWinner);
+
         } catch (ChestCaseOccupedException e) {
             this.occupedChest();
         }
     }
 
+    private void checkWinner(boolean isWinner) {
+        if (isWinner) {
+            JOptionPane.showMessageDialog(null,"Temos um vencedor!");
+        }
+    }
+
     private void occupedChest() {
         JOptionPane.showMessageDialog(null,"Ocupado!");
+    }
+
+    private void buttonPos1Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(0));
+    };
+    private void buttonPos2Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(1));
+    }
+    private void buttonPos3Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(2));
+    }
+    private void buttonPos4Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(3));
+    }
+    private void buttonPos5Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(4));
+    }
+    private void buttonPos6Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(5));
+    }
+    private void buttonPos7Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(6));
+    }
+    private void buttonPos8Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(7));
+    }
+    private void buttonPos9Click(ActionEvent event) {
+        this.doPlay(Util.singleToPos(8));
     }
 }
