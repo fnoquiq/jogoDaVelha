@@ -5,11 +5,10 @@ import exception.OutOfChestException;
 
 public class GameController {
 
-    private static final int CHEST_TAM = 3;
-
-    private static final int PLAYER_1 = 1;
-    private static final int PLAYER_2 = -1;
-    private static final int NO_PLAYER = 0;
+    public static final int CHEST_TAM = 3;
+    public static final int PLAYER_1 = 1;
+    public static final int PLAYER_2 = -1;
+    public static final int NO_PLAYER = 0;
 
     public int[][] chest = new int[CHEST_TAM][CHEST_TAM];
     public int winner;
@@ -51,7 +50,30 @@ public class GameController {
             return true;
         }
 
+        if (checkEnd()) {
+            return true;
+        }
+
         return false;
+    }
+
+    private boolean checkEnd() {
+        int sum=0;
+
+        for (int i=0; i<3; i++) {
+            for (int j=0; j<3; j++) {
+                if (this.chest[i][j] == GameController.PLAYER_1 || this.chest[i][j] == GameController.PLAYER_2) {
+                    sum++;
+                }
+            }
+        }
+
+        if (sum == GameController.CHEST_TAM * GameController.CHEST_TAM) {
+            this.winner = GameController.NO_PLAYER;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private boolean checkWinnerOnDioganal() {

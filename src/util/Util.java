@@ -45,9 +45,12 @@ public class Util {
                 pos.y = 2;
                 break;
             default:
-
+                System.out.println("Error on Util.SingleToPos");
+                break;
         }
 
         return pos;
     }
 }
+
+

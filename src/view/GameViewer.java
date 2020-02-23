@@ -135,7 +135,11 @@ public class GameViewer {
 
     private void checkWinner(boolean isWinner) {
         if (isWinner) {
-            this.currentPlayerLabel.setText("Vencedor: " + this.gameController.winner);
+            if (this.gameController.winner == GameController.NO_PLAYER) {
+                this.currentPlayerLabel.setText("Deu velha!");
+            } else {
+                this.currentPlayerLabel.setText("Vencedor: " + this.playerCharDecode(this.gameController.winner));
+            }
 
             for (JButton button : this.buttonChess) {
                 button.setEnabled(false);
@@ -150,14 +154,13 @@ public class GameViewer {
     private void buttonNewGameClick(ActionEvent event) {
         this.gameController.reset();
         this.refreshChest();
+
         for (JButton button : this.buttonChess) {
             button.setEnabled(true);
         }
     }
 
-    private void buttonPos1Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(0));
-    };
+    private void buttonPos1Click(ActionEvent event) { this.doPlay(Util.singleToPos(0)); };
     private void buttonPos2Click(ActionEvent event) {
         this.doPlay(Util.singleToPos(1));
     }
