@@ -45,6 +45,38 @@ public class GameController {
             return true;
         }
 
+        if (checkWinnerOnDioganal()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean checkWinnerOnDioganal() {
+        int sumPlayer1OnDioganal = 0;
+        int sumPlayer2OnDioganal = 0;
+
+        for (int i=0; i<3; i++) {
+            for (int j=0; j<3; j++) {
+               if (i==j) {
+                   int playerOnDiagonal = this.chest[i][j];
+                   if (playerOnDiagonal == GameController.PLAYER_1) {
+                       sumPlayer1OnDioganal += playerOnDiagonal;
+                   } else if (playerOnDiagonal == GameController.PLAYER_2) {
+                       sumPlayer2OnDioganal += playerOnDiagonal;
+                   }
+               }
+            }
+        }
+
+        if (sumPlayer1OnDioganal == 3) {
+            this.winner = GameController.PLAYER_1;
+            return true;
+        } else if (sumPlayer2OnDioganal == -3) {
+            this.winner = GameController.PLAYER_2;
+            return true;
+        }
+
         return false;
     }
 
