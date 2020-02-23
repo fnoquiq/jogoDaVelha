@@ -10,11 +10,11 @@ public class GameController {
     private static final int NO_PLAYER = 0;
 
     public int[][] chest = new int[3][3];
-    public int winner = GameController.NO_PLAYER;
-    public int currentPlayer = GameController.PLAYER_1;
+    public int winner;
+    public int currentPlayer;
 
     public GameController() {
-        this.resetChest();
+        this.reset();
     }
 
     public boolean play(int x,int y) throws ChestCaseOccupedException {
@@ -37,10 +37,73 @@ public class GameController {
     }
 
     private boolean checkWinner() {
+        if (checkWinnerOnRows()) {
+            return true;
+        }
+
+        if (checkWinnerOnColumns()) {
+            return true;
+        }
+
         return false;
     }
 
-    private void resetChest() {
+    private boolean checkWinnerOnRows() {
+        for (int i=0; i<3; i++) {
+            int sumPlayer1OnRows = 0;
+            int sumPlayer2OnRows = 0;
+
+            for (int j=0; j<3; j++) {
+                int playerOnRows = this.chest[i][j];
+                if (playerOnRows == GameController.PLAYER_1) {
+                    sumPlayer1OnRows += playerOnRows;
+                } else if (playerOnRows == GameController.PLAYER_2) {
+                    sumPlayer2OnRows += playerOnRows;
+                } else if (playerOnRows == GameController.NO_PLAYER) {
+                    break;
+                }
+            }
+
+            if (sumPlayer1OnRows == 3) {
+                this.winner = GameController.PLAYER_1;
+                return true;
+            } else if (sumPlayer2OnRows == -3) {
+                this.winner = GameController.PLAYER_2;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkWinnerOnColumns() {
+        for (int i=0; i<3; i++) {
+            int sumPlayer1OnColumns = 0;
+            int sumPlayer2OnColumns = 0;
+
+            for (int j=0; j<3; j++) {
+                int playerOnColumns = this.chest[j][i];
+                if (playerOnColumns == GameController.PLAYER_1) {
+                    sumPlayer1OnColumns += playerOnColumns;
+                } else if (playerOnColumns == GameController.PLAYER_2) {
+                    sumPlayer2OnColumns += playerOnColumns;
+                } else if (playerOnColumns == GameController.NO_PLAYER) {
+                    break;
+                }
+            }
+            if (sumPlayer1OnColumns == 3) {
+                this.winner = GameController.PLAYER_1;
+                return true;
+            } else if (sumPlayer2OnColumns == -3) {
+                this.winner = GameController.PLAYER_2;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void reset() {
+        currentPlayer = GameController.PLAYER_1;
+        this.winner = GameController.NO_PLAYER;
         for(int i=0; i<3; i++) {
             for(int j=0; j<3; j++) {
                 chest[i][j] = GameController.NO_PLAYER;

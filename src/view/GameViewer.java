@@ -22,6 +22,7 @@ public class GameViewer {
     private final int mode;
 
     private ArrayList<JButton> buttonChess = new ArrayList();
+    private JLabel currentPlayerLabel;
 
     private GameController gameController;
 
@@ -69,6 +70,7 @@ public class GameViewer {
 
             this.buttonChess.get(i).setText(this.playerCharDecode(this.gameController.chest[pos.x][pos.y]));
         }
+        this.currentPlayerLabel.setText("Vez do Jogador:" + this.gameController.currentPlayer);
     }
 
     private String playerCharDecode(int i) {
@@ -85,8 +87,12 @@ public class GameViewer {
     }
 
     private void renderStatus(JPanel panelStatus) {
-        JLabel currentPlayerLabel = new JLabel("Vez do Jogador: " + this.gameController.currentPlayer);
-        panelStatus.add(currentPlayerLabel);
+        this.currentPlayerLabel = new JLabel("Vez do Jogador: " + this.gameController.currentPlayer);
+        panelStatus.add(this.currentPlayerLabel);
+
+        JButton newGameButton = new JButton("Novo Jogo");
+        newGameButton.addActionListener(this::buttonNewGameClick);
+        panelStatus.add(newGameButton);
     }
 
     private void renderTabuleiro(JPanel panelChest) {
@@ -130,12 +136,24 @@ public class GameViewer {
 
     private void checkWinner(boolean isWinner) {
         if (isWinner) {
-            JOptionPane.showMessageDialog(null,"Temos um vencedor!");
+            this.currentPlayerLabel.setText("Vencedor: " + this.gameController.winner);
+
+            for (JButton button : this.buttonChess) {
+                button.setEnabled(false);
+            }
         }
     }
 
     private void occupedChest() {
         JOptionPane.showMessageDialog(null,"Ocupado!");
+    }
+
+    private void buttonNewGameClick(ActionEvent event) {
+        this.gameController.reset();
+        this.refreshChest();
+        for (JButton button : this.buttonChess) {
+            button.setEnabled(true);
+        }
     }
 
     private void buttonPos1Click(ActionEvent event) {
@@ -162,7 +180,5 @@ public class GameViewer {
     private void buttonPos8Click(ActionEvent event) {
         this.doPlay(Util.singleToPos(7));
     }
-    private void buttonPos9Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(8));
-    }
+    private void buttonPos9Click(ActionEvent event) { this.doPlay(Util.singleToPos(8)); }
 }
