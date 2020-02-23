@@ -14,6 +14,9 @@ public class GameViewer {
 
     public static final int SINGLEPLAYER = 0;
     public static final int MULTIPLAYER = 1;
+    public static final String PLAYER_1_CHAR = "X";
+    public static final String PLAYER_2_CHAR = "O";
+    public static final String NO_PLAYER_CHAR = ".";
 
     private JFrame frame;
     private final int mode;
@@ -64,7 +67,20 @@ public class GameViewer {
         for (int i=0;i<9;i++) {
             Pos pos = Util.singleToPos(i);
 
-            this.buttonChess.get(i).setText(this.gameController.chest[pos.x][pos.y] + "");
+            this.buttonChess.get(i).setText(this.playerCharDecode(this.gameController.chest[pos.x][pos.y]));
+        }
+    }
+
+    private String playerCharDecode(int i) {
+        switch (i) {
+            case -1:
+                return GameViewer.PLAYER_1_CHAR;
+            case 0:
+                return GameViewer.NO_PLAYER_CHAR;
+            case 1:
+                return GameViewer.PLAYER_2_CHAR;
+            default:
+                return "Error";
         }
     }
 
@@ -74,7 +90,7 @@ public class GameViewer {
     }
 
     private void renderTabuleiro(JPanel panelChest) {
-        String startCharOnButton = "0";
+        String startCharOnButton = GameViewer.NO_PLAYER_CHAR;
 
         panelChest.setLayout(new GridLayout(3,3));
 
