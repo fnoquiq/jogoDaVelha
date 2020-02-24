@@ -160,27 +160,13 @@ public class GameViewer {
         }
     }
 
-    private void buttonPos1Click(ActionEvent event) { this.doPlay(Util.singleToPos(0)); };
-    private void buttonPos2Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(1));
-    }
-    private void buttonPos3Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(2));
-    }
-    private void buttonPos4Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(3));
-    }
-    private void buttonPos5Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(4));
-    }
-    private void buttonPos6Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(5));
-    }
-    private void buttonPos7Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(6));
-    }
-    private void buttonPos8Click(ActionEvent event) {
-        this.doPlay(Util.singleToPos(7));
-    }
+    private void buttonPos1Click(ActionEvent event) { this.doPlay(Util.singleToPos(0)); }
+    private void buttonPos2Click(ActionEvent event) { this.doPlay(Util.singleToPos(1)); }
+    private void buttonPos3Click(ActionEvent event) { this.doPlay(Util.singleToPos(2)); }
+    private void buttonPos4Click(ActionEvent event) { this.doPlay(Util.singleToPos(3)); }
+    private void buttonPos5Click(ActionEvent event) { this.doPlay(Util.singleToPos(4)); }
+    private void buttonPos6Click(ActionEvent event) { this.doPlay(Util.singleToPos(5)); }
+    private void buttonPos7Click(ActionEvent event) { this.doPlay(Util.singleToPos(6)); }
+    private void buttonPos8Click(ActionEvent event) { this.doPlay(Util.singleToPos(7)); }
     private void buttonPos9Click(ActionEvent event) { this.doPlay(Util.singleToPos(8)); }
 }
