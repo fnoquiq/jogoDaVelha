@@ -1,5 +1,6 @@
 package view;
 
+import controller.BotController;
 import controller.GameController;
 import exception.ChestCaseOccupedException;
 import model.Pos;
@@ -20,22 +21,37 @@ public class GameViewer {
     public static final String NO_PLAYER_CHAR = ".";
 
     private JFrame frame;
-    private final int mode;
 
     private ArrayList<JButton> buttonChess = new ArrayList();
     private JLabel currentPlayerLabel;
 
     private GameController gameController;
+    private BotController botController;
 
     public GameViewer(int mode) {
-        this.mode = mode;
+        if (mode == GameViewer.SINGLEPLAYER_BOT_START || mode == GameViewer.SINGLEPLAYER_YOU_START) {
+            this.activateBot(mode);
+        }
+
         this.gameController = new GameController();
+    }
+
+    private void activateBot(int mode) {
+        boolean botStart;
+
+        if (mode == GameViewer.SINGLEPLAYER_YOU_START) {
+            botStart = false;
+        } else {
+            botStart = true;
+        }
+
+        this.botController = new BotController(this.gameController, botStart);
     }
 
     public void run() {
         this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setTitle("Game Viewer (" + this.mode + ")");
+        this.frame.setTitle("Game Viewer");
         this.frame.setVisible(true);
         this.frame.setSize(500,500);
         this.frame.setLayout(new BorderLayout());
