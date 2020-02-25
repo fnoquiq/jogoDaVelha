@@ -40,8 +40,8 @@ public class MenuViewer {
     }
 
     private void singlePlayerButtonClick(ActionEvent event) {
-        GameViewer game = new GameViewer(GameViewer.SINGLEPLAYER);
-        game.run();
+        WhoStartViewer view = new WhoStartViewer();
+        view.render();
         this.frame.dispose();
     }
 

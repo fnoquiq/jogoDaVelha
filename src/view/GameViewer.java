@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 public class GameViewer {
 
-    public static final int SINGLEPLAYER = 0;
-    public static final int MULTIPLAYER = 1;
+    public static final int SINGLEPLAYER_BOT_START = 0;
+    public static final int SINGLEPLAYER_YOU_START = 1;
+    public static final int MULTIPLAYER = 2;
     public static final String PLAYER_1_CHAR = "X";
     public static final String PLAYER_2_CHAR = "O";
     public static final String NO_PLAYER_CHAR = ".";
