@@ -2,6 +2,8 @@ package controller;
 
 import exception.ChestCaseOccupedException;
 import exception.OutOfChestException;
+import model.Pos;
+import view.GameViewer;
 
 public class GameController {
 
@@ -14,11 +16,37 @@ public class GameController {
     public int winner;
     public int currentPlayer;
 
-    public GameController() {
+    public BotController botController = null;
+    public boolean isBotActive = false;
+
+    public GameController(int mode) {
         this.reset();
+
+        if (mode == GameViewer.SINGLEPLAYER_YOU_START || mode == GameViewer.SINGLEPLAYER_BOT_START) {
+            this.isBotActive = true;
+
+            if (mode == GameViewer.SINGLEPLAYER_BOT_START) {
+                this.botController = new BotController(this,1);
+                Pos botPlay = this.botController.getNextPlay();
+                this.doPlay(botPlay.x,botPlay.y);
+            } else {
+                this.botController = new BotController(this,-1);
+            }
+        }
     }
 
-    public boolean play(int x,int y) throws ChestCaseOccupedException {
+    public boolean play(int x,int y) {
+        boolean isWinner = this.doPlay(x,y);
+
+        if (this.isBotActive && !isWinner) {
+            Pos botPlay = this.botController.getNextPlay();
+            isWinner = this.doPlay(botPlay.x,botPlay.y);
+        }
+
+        return isWinner;
+    }
+
+    private boolean doPlay(int x, int y) {
         if (x<0 || x>3) {
             throw new OutOfChestException("Value of X is out of the chest");
         }
@@ -28,7 +56,7 @@ public class GameController {
         }
 
         if (this.chest[x][y] != 0) {
-            throw new ChestCaseOccupedException("Pos x|y: " + x + y + " occuped!");
+            throw new ChestCaseOccupedException("Pos: " + x + "|" + y + " occuped! ");
         }
 
         this.chest[x][y] = this.currentPlayer;

@@ -5,24 +5,126 @@ import model.Pos;
 public class BotController {
 
     private GameController gameController;
+    private int botNumber;
 
-    public boolean isBotTurn;
+    private int random = 0;
 
-    public BotController(GameController gameController, boolean isBotStart) {
+    public BotController(GameController gameController, int botNumber) {
         this.gameController = gameController;
-
-        this.setIsBotTurn(isBotStart);
+        this.botNumber = botNumber;
     }
 
     public Pos getNextPlay() {
-        return new Pos();
+        Pos pos = this.justWin();
+
+        if (pos != null) {
+            System.out.println("Winnn");
+            return pos;
+        }
+
+        return this.justRandom();
     }
 
-    private void setIsBotTurn(boolean isBotStart) {
-        if (isBotStart) {
-            this.isBotTurn = true;
-        } else {
-            this.isBotTurn = false;
+    private Pos justWin() {
+        int countOnRows = 0;
+        int countOnColumn1 = 0;
+        int countOnColumn2 = 0;
+        int countOnColumn3 = 0;
+        int countOnDioganal = 0;
+        int countOnInverseDioganal = 0;
+
+        for (int x=0; x<3; x++) {
+            for (int y=0; y<3; y++) {
+                if (this.gameController.chest[x][y] == this.botNumber) {
+                    countOnRows++;
+
+                    if (x==0) {
+                        countOnColumn1++;
+                    } else if (x==2) {
+                        countOnColumn2++;
+                    } else {
+                        countOnColumn3++;
+                    }
+
+                    if (x==y) {
+                        countOnDioganal++;
+                    }
+
+                    if (x + y == (GameController.CHEST_TAM - 1) ) {
+                        countOnInverseDioganal++;
+                    }
+                }
+            }
+
+            if (countOnRows == 2) {
+                if (this.gameController.chest[x][0]==GameController.NO_PLAYER) {
+                    return new Pos(x,0);
+                } else if (this.gameController.chest[x][1]==GameController.NO_PLAYER) {
+                    return new Pos(x,1);
+                } else {
+                    return new Pos(x,2);
+                }
+            }
+
+            countOnRows = 0;
         }
+
+        if (countOnColumn1 == 2) {
+            if (this.gameController.chest[0][0]==GameController.NO_PLAYER) {
+                return new Pos(0,0);
+            } else if (this.gameController.chest[0][1]==GameController.NO_PLAYER) {
+                return new Pos(1,0);
+            } else {
+                return new Pos(2,0);
+            }
+        }
+
+        if (countOnColumn2 == 2) {
+            if (this.gameController.chest[1][0]==GameController.NO_PLAYER) {
+                return new Pos(0,1);
+            } else if (this.gameController.chest[1][1]==GameController.NO_PLAYER) {
+                return new Pos(1,1);
+            } else {
+                return new Pos(2,1);
+            }
+        }
+
+        if (countOnColumn3 == 2) {
+            if (this.gameController.chest[2][0]==GameController.NO_PLAYER) {
+                return new Pos(0,2);
+            } else if (this.gameController.chest[2][1]==GameController.NO_PLAYER) {
+                return new Pos(1,2);
+            } else {
+                return new Pos(2,2);
+            }
+        }
+
+        if (countOnDioganal == 2) {
+            if (this.gameController.chest[0][0] == GameController.NO_PLAYER) {
+                return new Pos(0,0);
+            } else if (this.gameController.chest[1][1] == GameController.NO_PLAYER) {
+                return new Pos(1,1);
+            } else {
+                return new Pos(2,2);
+            }
+        }
+
+        if (countOnInverseDioganal == 2) {
+            if (this.gameController.chest[0][2] == GameController.NO_PLAYER) {
+                return new Pos(0,2);
+            } else if (this.gameController.chest[1][1] == GameController.NO_PLAYER) {
+                return new Pos(1,1);
+            } else {
+                return new Pos(2,0);
+            }
+        }
+
+        return null;
+    }
+
+    private Pos justRandom() {
+        int x=2;
+        int y=0;
+        return new Pos(x,y);
     }
 }

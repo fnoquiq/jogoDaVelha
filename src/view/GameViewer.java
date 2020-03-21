@@ -3,6 +3,7 @@ package view;
 import controller.BotController;
 import controller.GameController;
 import exception.ChestCaseOccupedException;
+import exception.OutOfChestException;
 import model.Pos;
 import util.Util;
 
@@ -26,26 +27,9 @@ public class GameViewer {
     private JLabel currentPlayerLabel;
 
     private GameController gameController;
-    private BotController botController;
 
     public GameViewer(int mode) {
-        if (mode == GameViewer.SINGLEPLAYER_BOT_START || mode == GameViewer.SINGLEPLAYER_YOU_START) {
-            this.activateBot(mode);
-        }
-
-        this.gameController = new GameController();
-    }
-
-    private void activateBot(int mode) {
-        boolean botStart;
-
-        if (mode == GameViewer.SINGLEPLAYER_YOU_START) {
-            botStart = false;
-        } else {
-            botStart = true;
-        }
-
-        this.botController = new BotController(this.gameController, botStart);
+        this.gameController = new GameController(mode);
     }
 
     public void run() {
@@ -145,7 +129,7 @@ public class GameViewer {
 
             this.checkWinner(isWinner);
 
-        } catch (ChestCaseOccupedException e) {
+        } catch (ChestCaseOccupedException | OutOfChestException e) {
             this.occupedChest();
         }
     }
