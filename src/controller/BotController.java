@@ -33,25 +33,16 @@ public class BotController {
     }
 
     private Pos justWin() {
+        int x,y;
         int countOnRows = 0;
-        int countOnColumn1 = 0;
-        int countOnColumn2 = 0;
-        int countOnColumn3 = 0;
+        int countOnColumns = 0;
         int countOnDioganal = 0;
         int countOnInverseDioganal = 0;
 
-        for (int x=0; x<3; x++) {
-            for (int y=0; y<3; y++) {
+        for (x=0; x<3; x++) {
+            for (y=0; y<3; y++) {
                 if (this.gameController.chest[x][y] == this.botNumber) {
                     countOnRows++;
-
-                    if (x==0) {
-                        countOnColumn1++;
-                    } else if (x==1) {
-                        countOnColumn2++;
-                    } else {
-                        countOnColumn3++;
-                    }
 
                     if (x==y) {
                         countOnDioganal++;
@@ -60,6 +51,10 @@ public class BotController {
                     if (x + y == (GameController.CHEST_TAM - 1) ) {
                         countOnInverseDioganal++;
                     }
+                }
+
+                if (this.gameController.chest[y][x] == this.botNumber) {
+                    countOnColumns++;
                 }
             }
 
@@ -73,37 +68,18 @@ public class BotController {
                 }
             }
 
+            if (countOnColumns == 2) {
+                if (this.gameController.chest[0][x]==GameController.NO_PLAYER) {
+                    return new Pos(0,x);
+                } else if (this.gameController.chest[1][x]==GameController.NO_PLAYER) {
+                    return new Pos(1,x);
+                } else if (this.gameController.chest[2][x]==GameController.NO_PLAYER) {
+                    return new Pos(2,x);
+                }
+            }
+
             countOnRows = 0;
-        }
-
-        if (countOnColumn1 == 2) {
-            if (this.gameController.chest[0][0]==GameController.NO_PLAYER) {
-                return new Pos(0,0);
-            } else if (this.gameController.chest[0][1]==GameController.NO_PLAYER) {
-                return new Pos(1,0);
-            } else if (this.gameController.chest[0][2]==GameController.NO_PLAYER) {
-                return new Pos(2,0);
-            }
-        }
-
-        if (countOnColumn2 == 2) {
-            if (this.gameController.chest[1][0]==GameController.NO_PLAYER) {
-                return new Pos(0,1);
-            } else if (this.gameController.chest[1][1]==GameController.NO_PLAYER) {
-                return new Pos(1,1);
-            } else if (this.gameController.chest[1][2]==GameController.NO_PLAYER) {
-                return new Pos(2,1);
-            }
-        }
-
-        if (countOnColumn3 == 2) {
-            if (this.gameController.chest[2][0]==GameController.NO_PLAYER) {
-                return new Pos(0,2);
-            } else if (this.gameController.chest[2][1]==GameController.NO_PLAYER) {
-                return new Pos(1,2);
-            } else if (this.gameController.chest[2][2]==GameController.NO_PLAYER) {
-                return new Pos(2,2);
-            }
+            countOnColumns = 0;
         }
 
         if (countOnDioganal == 2) {
@@ -131,9 +107,7 @@ public class BotController {
 
     private Pos justDontLose() {
         int countOnRows = 0;
-        int countOnColumn1 = 0;
-        int countOnColumn2 = 0;
-        int countOnColumn3 = 0;
+        int countOnColumns = 0;
         int countOnDioganal = 0;
         int countOnInverseDioganal = 0;
 
@@ -142,14 +116,6 @@ public class BotController {
                 if (this.gameController.chest[x][y] == this.playerNumber) {
                     countOnRows++;
 
-                    if (x==0) {
-                        countOnColumn1++;
-                    } else if (x==1) {
-                        countOnColumn2++;
-                    } else {
-                        countOnColumn3++;
-                    }
-
                     if (x==y) {
                         countOnDioganal++;
                     }
@@ -157,6 +123,10 @@ public class BotController {
                     if (x + y == (GameController.CHEST_TAM - 1) ) {
                         countOnInverseDioganal++;
                     }
+                }
+
+                if (this.gameController.chest[y][x] == this.playerNumber) {
+                    countOnColumns++;
                 }
             }
 
@@ -170,37 +140,18 @@ public class BotController {
                 }
             }
 
+            if (countOnColumns == 2) {
+                if (this.gameController.chest[0][x]==GameController.NO_PLAYER) {
+                    return new Pos(0,x);
+                } else if (this.gameController.chest[1][x]==GameController.NO_PLAYER) {
+                    return new Pos(1,x);
+                } else if (this.gameController.chest[2][x]==GameController.NO_PLAYER) {
+                    return new Pos(2,x);
+                }
+            }
+
             countOnRows = 0;
-        }
-
-        if (countOnColumn1 == 2) {
-            if (this.gameController.chest[0][0]==GameController.NO_PLAYER) {
-                return new Pos(0,0);
-            } else if (this.gameController.chest[0][1]==GameController.NO_PLAYER) {
-                return new Pos(1,0);
-            } else if (this.gameController.chest[0][2]==GameController.NO_PLAYER){
-                return new Pos(2,0);
-            }
-        }
-
-        if (countOnColumn2 == 2) {
-            if (this.gameController.chest[1][0]==GameController.NO_PLAYER) {
-                return new Pos(0,1);
-            } else if (this.gameController.chest[1][1]==GameController.NO_PLAYER) {
-                return new Pos(1,1);
-            } else if (this.gameController.chest[1][2]==GameController.NO_PLAYER) {
-                return new Pos(2,1);
-            }
-        }
-
-        if (countOnColumn3 == 2) {
-            if (this.gameController.chest[2][0]==GameController.NO_PLAYER) {
-                return new Pos(0,2);
-            } else if (this.gameController.chest[2][1]==GameController.NO_PLAYER) {
-                return new Pos(1,2);
-            } else if (this.gameController.chest[2][2]==GameController.NO_PLAYER) {
-                return new Pos(2,2);
-            }
+            countOnColumns = 0;
         }
 
         if (countOnDioganal == 2) {
