@@ -36,6 +36,8 @@ public class GameController {
     }
 
     public boolean play(int x,int y) {
+        this.isValidPosition(x,y);
+
         boolean isWinner = this.doPlay(x,y);
 
         if (this.isBotActive && !isWinner) {
@@ -46,7 +48,7 @@ public class GameController {
         return isWinner;
     }
 
-    private boolean doPlay(int x, int y) {
+    private boolean isValidPosition(int x, int y) {
         if (x<0 || x>3) {
             throw new OutOfChestException("Value of X is out of the chest");
         }
@@ -58,6 +60,11 @@ public class GameController {
         if (this.chest[x][y] != 0) {
             throw new ChestCaseOccupedException("Pos: " + x + "|" + y + " occuped! ");
         }
+
+        return true;
+    }
+
+    private boolean doPlay(int x, int y) {
 
         this.chest[x][y] = this.currentPlayer;
         this.currentPlayer *= -1;

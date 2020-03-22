@@ -1,28 +1,40 @@
 package controller;
 
 import model.Pos;
+import view.GameViewer;
+
+import java.util.Random;
 
 public class BotController {
 
     private GameController gameController;
     private int botNumber;
-
-    private int random = 0;
+    private int playerNumber;
 
     public BotController(GameController gameController, int botNumber) {
         this.gameController = gameController;
         this.botNumber = botNumber;
+        this.playerNumber = this.botNumber * -1;
     }
 
     public Pos getNextPlay() {
         Pos pos = this.justWin();
 
         if (pos != null) {
-            System.out.println("Winnn");
+            System.out.println("Win por justWin");
             return pos;
         }
 
-        return this.justRandom();
+        pos = this.justDontLose();
+
+        if (pos != null) {
+            System.out.println("Win por justDontLose");
+            return pos;
+        }
+
+        System.out.println("Random");
+
+        return this.justGetARandomValidPosition();
     }
 
     private Pos justWin() {
@@ -40,7 +52,7 @@ public class BotController {
 
                     if (x==0) {
                         countOnColumn1++;
-                    } else if (x==2) {
+                    } else if (x==1) {
                         countOnColumn2++;
                     } else {
                         countOnColumn3++;
@@ -122,9 +134,22 @@ public class BotController {
         return null;
     }
 
-    private Pos justRandom() {
-        int x=2;
-        int y=0;
-        return new Pos(x,y);
+    private Pos justDontLose() {
+
+        return null;
+    }
+
+    private Pos justGetARandomValidPosition() {
+
+        do {
+            Random random = new Random();
+            int x = random.nextInt(GameController.CHEST_TAM);
+            int y = random.nextInt(GameController.CHEST_TAM);
+
+            System.out.println(x + " " + y);
+            if (this.gameController.chest[x][y] == GameController.NO_PLAYER) {
+                return new Pos(x,y);
+            }
+        } while(true);
     }
 }

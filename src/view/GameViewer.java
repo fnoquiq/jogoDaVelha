@@ -61,6 +61,8 @@ public class GameViewer {
 
         this.renderStatus(panelTop);
         this.renderTabuleiro(panelMid);
+
+        this.refreshChest();
     }
 
     private void refreshChest() {
